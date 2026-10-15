@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ListOrdered, Plus, Wallet } from "lucide-react";
+import { CloudUpload, LayoutDashboard, ListOrdered, Plus, Wallet } from "lucide-react";
 import { useExpenseActions } from "./Providers";
 import { Button } from "./ui";
+import { SyncStatusPill } from "./cloud/SyncStatusPill";
 
 const LINKS = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/expenses", label: "Expenses", icon: ListOrdered },
+  { href: "/exports", label: "Export Hub", icon: CloudUpload },
 ];
 
 export function Navbar() {
@@ -45,9 +47,12 @@ export function Navbar() {
             })}
           </nav>
 
-          <Button onClick={openCreate} icon={<Plus className="h-4 w-4" aria-hidden />} className="hidden sm:inline-flex">
-            Add expense
-          </Button>
+          <div className="flex items-center gap-3">
+            <SyncStatusPill />
+            <Button onClick={openCreate} icon={<Plus className="h-4 w-4" aria-hidden />} className="hidden sm:inline-flex">
+              Add expense
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -56,8 +61,8 @@ export function Navbar() {
         aria-label="Main"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden"
       >
-        <div className="grid grid-cols-3">
-          {LINKS.slice(0, 1).map(({ href, label, icon: Icon }) => (
+        <div className="grid grid-cols-4">
+          {LINKS.slice(0, 2).map(({ href, label, icon: Icon }) => (
             <MobileLink key={href} href={href} label={label} Icon={Icon} active={pathname === href} />
           ))}
           <div className="flex items-center justify-center">
@@ -70,7 +75,7 @@ export function Navbar() {
               <Plus className="h-6 w-6" />
             </button>
           </div>
-          {LINKS.slice(1).map(({ href, label, icon: Icon }) => (
+          {LINKS.slice(2).map(({ href, label, icon: Icon }) => (
             <MobileLink key={href} href={href} label={label} Icon={Icon} active={pathname === href} />
           ))}
         </div>
@@ -94,7 +99,7 @@ function MobileLink({
     <Link
       href={href}
       aria-current={active ? "page" : undefined}
-      className={`flex flex-col items-center gap-1 py-2.5 text-xs font-medium ${active ? "text-brand-600" : "text-slate-500"}`}
+      className={`flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium ${active ? "text-brand-600" : "text-slate-500"}`}
     >
       <Icon className="h-5 w-5" aria-hidden />
       {label}

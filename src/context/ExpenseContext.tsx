@@ -13,6 +13,8 @@ interface ExpenseContextValue {
   updateExpense: (id: string, input: ExpenseInput) => void;
   deleteExpense: (id: string) => Expense | undefined;
   clearAll: () => void;
+  /** Restores expenses from a backup. Merge keeps existing records and skips duplicate ids. */
+  importExpenses: (incoming: Expense[], mode: "merge" | "replace") => { added: number; skipped: number };
 }
 
 const ExpenseContext = createContext<ExpenseContextValue | null>(null);
@@ -99,6 +101,17 @@ export function ExpenseProvider({
 
   const clearAll = useCallback(() => setExpenses([]), []);
 
+  const importExpenses = useCallback((incoming: Expense[], mode: "merge" | "replace") => {
+    if (mode === "replace") {
+      setExpenses(incoming);
+      return { added: incoming.length, skipped: 0 };
+    }
+    const existing = new Set(expensesRef.current.map((e) => e.id));
+    const fresh = incoming.filter((e) => !existing.has(e.id));
+    setExpenses((current) => [...fresh, ...current]);
+    return { added: fresh.length, skipped: incoming.length - fresh.length };
+  }, []);
+
   const value = useMemo(
     () => ({
       expenses,
@@ -109,8 +122,9 @@ export function ExpenseProvider({
       updateExpense,
       deleteExpense,
       clearAll,
+      importExpenses,
     }),
-    [expenses, isLoading, loadError, addExpense, addMany, updateExpense, deleteExpense, clearAll],
+    [expenses, isLoading, loadError, addExpense, addMany, updateExpense, deleteExpense, clearAll, importExpenses],
   );
 
   return <ExpenseContext.Provider value={value}>{children}</ExpenseContext.Provider>;

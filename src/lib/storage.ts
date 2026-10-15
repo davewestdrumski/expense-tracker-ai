@@ -2,7 +2,7 @@ import { CATEGORIES, type Expense } from "@/types/expense";
 
 const STORAGE_KEY = "expense-tracker:expenses:v1";
 
-function isExpense(value: unknown): value is Expense {
+export function isExpense(value: unknown): value is Expense {
   if (typeof value !== "object" || value === null) return false;
   const e = value as Record<string, unknown>;
   return (

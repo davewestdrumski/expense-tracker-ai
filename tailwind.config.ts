@@ -26,6 +26,10 @@ const config: Config = {
       },
       keyframes: {
         "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
+        "slide-in-right": {
+          from: { transform: "translateX(100%)" },
+          to: { transform: "translateX(0)" },
+        },
         "slide-up": {
           from: { opacity: "0", transform: "translateY(8px)" },
           to: { opacity: "1", transform: "translateY(0)" },
@@ -34,6 +38,7 @@ const config: Config = {
       animation: {
         "fade-in": "fade-in 150ms ease-out",
         "slide-up": "slide-up 200ms ease-out",
+        "slide-in-right": "slide-in-right 250ms cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },
