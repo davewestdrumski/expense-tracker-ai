@@ -8,11 +8,14 @@ import { formatCurrency } from "@/lib/format";
 import { ExpenseForm } from "./ExpenseForm";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { Modal } from "./Modal";
+import { ExportDialog } from "./export/ExportDialog";
+import type { ExportOptions } from "@/lib/export/types";
 
 interface ExpenseActions {
   openCreate: () => void;
   openEdit: (expense: Expense) => void;
   requestDelete: (expense: Expense) => void;
+  openExport: (preset?: Partial<ExportOptions>) => void;
 }
 
 const ExpenseActionsContext = createContext<ExpenseActions | null>(null);
@@ -29,12 +32,18 @@ function ExpenseActionsHost({ children }: { children: ReactNode }) {
   const { toast } = useToast();
   const [formState, setFormState] = useState<{ open: boolean; editing?: Expense }>({ open: false });
   const [pendingDelete, setPendingDelete] = useState<Expense | null>(null);
+  const [exportState, setExportState] = useState<{ open: boolean; preset?: Partial<ExportOptions>; key: number }>({
+    open: false,
+    key: 0,
+  });
 
   const actions = useMemo<ExpenseActions>(
     () => ({
       openCreate: () => setFormState({ open: true }),
       openEdit: (expense) => setFormState({ open: true, editing: expense }),
       requestDelete: (expense) => setPendingDelete(expense),
+      // A fresh key per open resets the dialog's internal state.
+      openExport: (preset) => setExportState((s) => ({ open: true, preset, key: s.key + 1 })),
     }),
     [],
   );
@@ -87,6 +96,14 @@ function ExpenseActionsHost({ children }: { children: ReactNode }) {
         onConfirm={confirmDelete}
         onCancel={() => setPendingDelete(null)}
       />
+      {exportState.open && (
+        <ExportDialog
+          key={exportState.key}
+          open
+          preset={exportState.preset}
+          onClose={() => setExportState((s) => ({ ...s, open: false }))}
+        />
+      )}
     </ExpenseActionsContext.Provider>
   );
 }

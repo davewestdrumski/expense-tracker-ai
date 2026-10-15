@@ -1,12 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Download, Plus, SearchX } from "lucide-react";
+import { FileDown, Plus, SearchX } from "lucide-react";
 import { useExpenses } from "@/context/ExpenseContext";
-import { useToast } from "@/context/ToastContext";
-import { DEFAULT_FILTERS, describeRange, downloadCSV, filterExpenses, sortExpenses, sumAmounts } from "@/lib/expenses";
+import { DEFAULT_FILTERS, describeRange, filterExpenses, sortExpenses, sumAmounts } from "@/lib/expenses";
 import { formatCurrency } from "@/lib/format";
-import type { ExpenseFilters, SortKey } from "@/types/expense";
+import { CATEGORIES, type ExpenseFilters, type SortKey } from "@/types/expense";
 import { ExpenseFiltersBar } from "@/components/ExpenseFiltersBar";
 import { ExpenseRow } from "@/components/ExpenseRow";
 import { EmptyState } from "@/components/EmptyState";
@@ -19,8 +18,7 @@ const PAGE_SIZE = 50;
 
 export default function ExpensesPage() {
   const { expenses, isLoading } = useExpenses();
-  const { openCreate } = useExpenseActions();
-  const { toast } = useToast();
+  const { openCreate, openExport } = useExpenseActions();
   const [filters, setFilters] = useState<ExpenseFilters>(DEFAULT_FILTERS);
   const [sort, setSort] = useState<SortKey>("date-desc");
   const [visible, setVisible] = useState(PAGE_SIZE);
@@ -33,19 +31,15 @@ export default function ExpensesPage() {
     setVisible(PAGE_SIZE);
   };
 
-  const handleExport = () => {
-    if (results.length === 0) {
-      toast("Nothing to export with the current filters", "error");
-      return;
-    }
-    try {
-      downloadCSV(results);
-      toast(`Exported ${results.length} ${results.length === 1 ? "expense" : "expenses"} to CSV`);
-    } catch (err) {
-      console.error(err);
-      toast("Export failed. Please try again.", "error");
-    }
-  };
+  // Carry the page's current filters into the export dialog.
+  const handleExport = () =>
+    openExport({
+      startDate: filters.startDate,
+      endDate: filters.endDate,
+      categories: filters.category === "All" ? [...CATEGORIES] : [filters.category],
+      search: filters.search,
+      sort,
+    });
 
   const header = (
     <PageHeader
@@ -57,9 +51,9 @@ export default function ExpensesPage() {
             variant="secondary"
             onClick={handleExport}
             disabled={isLoading || expenses.length === 0}
-            icon={<Download className="h-4 w-4" aria-hidden />}
+            icon={<FileDown className="h-4 w-4" aria-hidden />}
           >
-            Export CSV
+            Export…
           </Button>
           <Button onClick={openCreate} icon={<Plus className="h-4 w-4" aria-hidden />}>
             Add expense

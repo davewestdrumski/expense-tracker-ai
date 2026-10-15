@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, FileDown, Plus } from "lucide-react";
 import { useExpenses } from "@/context/ExpenseContext";
 import { monthKey, toISODate } from "@/lib/format";
 import { monthlyTotals, sumAmounts, totalsByCategory } from "@/lib/expenses";
@@ -20,7 +20,7 @@ type Period = "month" | "all";
 
 export default function DashboardPage() {
   const { expenses, isLoading } = useExpenses();
-  const { openCreate } = useExpenseActions();
+  const { openCreate, openExport } = useExpenseActions();
   const [period, setPeriod] = useState<Period>("month");
 
   const stats = useMemo(() => {
@@ -51,9 +51,19 @@ export default function DashboardPage() {
       title="Dashboard"
       subtitle={new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
       actions={
-        <Button onClick={openCreate} icon={<Plus className="h-4 w-4" aria-hidden />} className="sm:hidden">
-          Add expense
-        </Button>
+        <>
+          <Button
+            variant="secondary"
+            onClick={() => openExport()}
+            disabled={isLoading || expenses.length === 0}
+            icon={<FileDown className="h-4 w-4" aria-hidden />}
+          >
+            Export…
+          </Button>
+          <Button onClick={openCreate} icon={<Plus className="h-4 w-4" aria-hidden />} className="sm:hidden">
+            Add expense
+          </Button>
+        </>
       }
     />
   );

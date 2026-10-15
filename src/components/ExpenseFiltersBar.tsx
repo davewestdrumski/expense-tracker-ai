@@ -2,7 +2,7 @@
 
 import { Search, X } from "lucide-react";
 import { CATEGORIES, type ExpenseFilters, type SortKey } from "@/types/expense";
-import { toISODate } from "@/lib/format";
+import { DATE_PRESETS, presetRange } from "@/lib/date-ranges";
 import { DEFAULT_FILTERS } from "@/lib/expenses";
 import { inputClass } from "./ui";
 
@@ -13,29 +13,7 @@ interface Props {
   onSortChange: (sort: SortKey) => void;
 }
 
-function presetRange(preset: "this-month" | "last-month" | "30d" | "year"): Pick<ExpenseFilters, "startDate" | "endDate"> {
-  const now = new Date();
-  switch (preset) {
-    case "this-month":
-      return { startDate: toISODate(new Date(now.getFullYear(), now.getMonth(), 1)), endDate: toISODate(now) };
-    case "last-month":
-      return {
-        startDate: toISODate(new Date(now.getFullYear(), now.getMonth() - 1, 1)),
-        endDate: toISODate(new Date(now.getFullYear(), now.getMonth(), 0)),
-      };
-    case "30d":
-      return { startDate: toISODate(new Date(now.getFullYear(), now.getMonth(), now.getDate() - 29)), endDate: toISODate(now) };
-    case "year":
-      return { startDate: toISODate(new Date(now.getFullYear(), 0, 1)), endDate: toISODate(now) };
-  }
-}
-
-const PRESETS = [
-  { id: "this-month", label: "This month" },
-  { id: "last-month", label: "Last month" },
-  { id: "30d", label: "Last 30 days" },
-  { id: "year", label: "This year" },
-] as const;
+const FILTER_PRESETS = DATE_PRESETS.filter((p) => p.id !== "90d");
 
 export function ExpenseFiltersBar({ filters, onChange, sort, onSortChange }: Props) {
   const set = (patch: Partial<ExpenseFilters>) => onChange({ ...filters, ...patch });
@@ -102,7 +80,7 @@ export function ExpenseFiltersBar({ filters, onChange, sort, onSortChange }: Pro
       </div>
 
       <div className="flex flex-wrap items-center gap-2">
-        {PRESETS.map((p) => {
+        {FILTER_PRESETS.map((p) => {
           const range = presetRange(p.id);
           const active = filters.startDate === range.startDate && filters.endDate === range.endDate;
           return (

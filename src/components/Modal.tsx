@@ -9,10 +9,14 @@ interface ModalProps {
   title: string;
   description?: string;
   children: ReactNode;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "xl";
+  /** Pinned to the bottom of the dialog, outside the scrolling body. */
+  footer?: ReactNode;
 }
 
-export function Modal({ open, onClose, title, description, children, size = "md" }: ModalProps) {
+const SIZE_CLASS = { sm: "sm:max-w-md", md: "sm:max-w-lg", xl: "sm:max-w-5xl" };
+
+export function Modal({ open, onClose, title, description, children, size = "md", footer }: ModalProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
@@ -46,11 +50,9 @@ export function Modal({ open, onClose, title, description, children, size = "md"
         aria-modal="true"
         aria-labelledby="modal-title"
         tabIndex={-1}
-        className={`relative max-h-[92vh] w-full animate-slide-up overflow-y-auto rounded-t-2xl bg-white shadow-xl outline-none sm:rounded-2xl ${
-          size === "sm" ? "sm:max-w-md" : "sm:max-w-lg"
-        }`}
+        className={`relative flex max-h-[92vh] w-full animate-slide-up flex-col overflow-hidden rounded-t-2xl bg-white shadow-xl outline-none sm:rounded-2xl ${SIZE_CLASS[size]}`}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-slate-100 px-6 py-4">
+        <div className="flex shrink-0 items-start justify-between gap-4 border-b border-slate-100 px-6 py-4">
           <div>
             <h2 id="modal-title" className="text-lg font-semibold text-slate-900">
               {title}
@@ -66,7 +68,8 @@ export function Modal({ open, onClose, title, description, children, size = "md"
             <X className="h-5 w-5" />
           </button>
         </div>
-        <div className="px-6 py-5">{children}</div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5">{children}</div>
+        {footer && <div className="shrink-0 border-t border-slate-100 bg-slate-50/80 px-6 py-4">{footer}</div>}
       </div>
     </div>
   );

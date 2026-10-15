@@ -64,33 +64,6 @@ export function monthlyTotals(expenses: Expense[], months = 6, now = new Date())
   return result;
 }
 
-function csvEscape(value: string): string {
-  // Guard against CSV/formula injection when opened in spreadsheet apps.
-  const safe = /^[=+\-@\t\r]/.test(value) ? `'${value}` : value;
-  return /[",\n\r]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
-}
-
-export function expensesToCSV(expenses: Expense[]): string {
-  const header = ["Date", "Description", "Category", "Amount"];
-  const rows = expenses.map((e) =>
-    [e.date, csvEscape(e.description), e.category, e.amount.toFixed(2)].join(","),
-  );
-  return [header.join(","), ...rows].join("\r\n");
-}
-
-export function downloadCSV(expenses: Expense[], filename = `expenses-${toISODate(new Date())}.csv`): void {
-  // Prepend BOM so Excel detects UTF-8 correctly.
-  const blob = new Blob(["﻿" + expensesToCSV(expenses)], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 0);
-}
-
 export function describeRange(start: string, end: string): string {
   if (start && end) return `${formatDate(start)} – ${formatDate(end)}`;
   if (start) return `From ${formatDate(start)}`;
