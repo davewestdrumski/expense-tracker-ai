@@ -2,10 +2,10 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Download, Plus } from "lucide-react";
 import { useExpenses } from "@/context/ExpenseContext";
 import { monthKey, toISODate } from "@/lib/format";
-import { monthlyTotals, sumAmounts, totalsByCategory } from "@/lib/expenses";
+import { downloadCSV, monthlyTotals, sortExpenses, sumAmounts, totalsByCategory } from "@/lib/expenses";
 import { SummaryCards } from "@/components/SummaryCards";
 import { MonthlyChart } from "@/components/MonthlyChart";
 import { CategoryBreakdown } from "@/components/CategoryBreakdown";
@@ -51,9 +51,19 @@ export default function DashboardPage() {
       title="Dashboard"
       subtitle={new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
       actions={
-        <Button onClick={openCreate} icon={<Plus className="h-4 w-4" aria-hidden />} className="sm:hidden">
-          Add expense
-        </Button>
+        <>
+          <Button
+            variant="secondary"
+            onClick={() => downloadCSV(sortExpenses(expenses, "date-desc"))}
+            disabled={isLoading || expenses.length === 0}
+            icon={<Download className="h-4 w-4" aria-hidden />}
+          >
+            Export Data
+          </Button>
+          <Button onClick={openCreate} icon={<Plus className="h-4 w-4" aria-hidden />} className="sm:hidden">
+            Add expense
+          </Button>
+        </>
       }
     />
   );
