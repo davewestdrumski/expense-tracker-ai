@@ -30,10 +30,10 @@ The export contains **exactly what the list shows**, so filter first:
 
 ## What's in the file
 
-| Date | Description | Category | Amount |
+| Date | Category | Amount | Description |
 |---|---|---|---|
-| 2026-10-15 | Weekly groceries | Food | 84.20 |
-| 2026-10-14 | Internet | Bills | 65.00 |
+| 2026-10-15 | Food | 84.20 | Weekly groceries |
+| 2026-10-14 | Bills | 65.00 | Internet |
 
 Amounts are plain numbers, so you can total them with `=SUM()` straight away.
 
@@ -51,8 +51,11 @@ Open the file with **File → Open** rather than double-clicking it. The file is
 **A description starts with an apostrophe (`'`).**
 That's intentional. Descriptions beginning with `=`, `+`, `-` or `@` get an apostrophe so the spreadsheet doesn't treat them as formulas.
 
+> **Just want everything?** Click **Export Data** on the Dashboard. See [How to export all your data](how-to-data-export.md).
+
 ## Related guides
 
+- [How to export all your data](how-to-data-export.md)
 - [How to search and filter expenses](how-to-expense-search-filtering.md)
 - [How to keep your data safe](how-to-data-persistence.md)
 

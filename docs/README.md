@@ -11,7 +11,8 @@ Generate docs for a new feature with the Claude Code command `/document-feature 
 | Expense Management | [Implementation](dev/expense-management-implementation.md) | [How to add, edit and delete expenses](user/how-to-expense-management.md) |
 | Expense Search & Filtering | [Implementation](dev/expense-search-filtering-implementation.md) | [How to search and filter expenses](user/how-to-expense-search-filtering.md) |
 | Dashboard Analytics | [Implementation](dev/dashboard-analytics-implementation.md) | [How to read your dashboard](user/how-to-dashboard-analytics.md) |
-| CSV Export | [Implementation](dev/csv-export-implementation.md) | [How to export to CSV](user/how-to-csv-export.md) |
+| CSV Export (Expenses page) | [Implementation](dev/csv-export-implementation.md) | [How to export to CSV](user/how-to-csv-export.md) |
+| Data Export (one-click, Dashboard) | [Implementation](dev/data-export-implementation.md) | [How to export all your data](user/how-to-data-export.md) |
 | Data Persistence & Sample Data | [Implementation](dev/data-persistence-implementation.md) | [How to keep your data safe](user/how-to-data-persistence.md) |
 
 ## Conventions

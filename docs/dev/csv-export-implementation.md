@@ -40,7 +40,7 @@ downloadCSV(expenses: Expense[], filename = `expenses-${YYYY-MM-DD}.csv`): void;
 
 | Property | Value |
 |---|---|
-| Columns | `Date, Description, Category, Amount` |
+| Columns | `Date, Category, Amount, Description` (shared with the Dashboard's [one-click export](data-export-implementation.md)) |
 | Date | `YYYY-MM-DD` (sortable, locale-neutral) |
 | Amount | Plain number with 2 decimals, no currency symbol (`12.50`), so spreadsheets treat it as numeric |
 | Line endings | `\r\n` (RFC 4180) |
@@ -84,7 +84,7 @@ There are no automated tests yet. Manual checklist:
 - CSV only; columns are fixed.
 - The filename can't be customized.
 
-> **Branch note:** the three `feature-data-export-*` branches change or replace this feature. See each branch's `docs/dev/data-export-implementation.md`.
+> **Branch note (`feature-data-export-v1`):** the Dashboard's **Export Data** button reuses this pipeline to export *all* expenses. See [Data Export (One-Click)](data-export-implementation.md).
 
 ## Related documentation
 

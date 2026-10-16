@@ -25,10 +25,10 @@ Spendwise saves your expenses automatically, but only in **this browser on this 
 
 Export your expenses regularly:
 
-1. Go to **Expenses**, clear any filters, and click **Export CSV**.
+1. On the **Dashboard**, click **Export Data** to download all your expenses.
 2. Keep the downloaded file somewhere safe, such as your cloud drive.
 
-See [How to export to CSV](how-to-csv-export.md).
+See [How to export all your data](how-to-data-export.md).
 
 ## Try Spendwise with sample data
 
