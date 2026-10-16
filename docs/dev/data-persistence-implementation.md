@@ -96,11 +96,11 @@ There are no automated tests yet. Manual checklist:
 
 ## Known limitations
 
-- No sync between devices or browsers; no backup or import in this branch. Export to CSV is the only way out. See [CSV Export](csv-export-implementation.md).
+- No sync between devices or browsers; no backup or import in this branch. Exporting (CSV, JSON or PDF) is the only way to get data out. See [Data Export](data-export-implementation.md).
 - No undo or history.
 - No schema migrations yet (the `v1` key suffix leaves room for them).
 
 ## Related documentation
 
 - [Expense Management](expense-management-implementation.md)
-- [CSV Export](csv-export-implementation.md)
+- [Data Export](data-export-implementation.md)

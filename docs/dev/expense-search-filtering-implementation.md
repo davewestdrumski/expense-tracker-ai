@@ -30,6 +30,7 @@ Filtering and sorting are **pure functions** in `src/lib/expenses.ts`, so they'r
 |---|---|
 | `src/app/expenses/page.tsx` | Page state, derived results, results header, list, paging, empty states |
 | `src/components/ExpenseFiltersBar.tsx` | Search, category select, sort select, start/end dates, preset chips, Clear filters |
+| `src/lib/date-ranges.ts` | `DATE_PRESETS`, `presetRange`, `matchPreset`; shared with the export dialog |
 | `src/lib/expenses.ts` | `filterExpenses`, `sortExpenses`, `sumAmounts`, `describeRange`, `DEFAULT_FILTERS` |
 | `src/components/ExpenseRow.tsx` | Row rendering with edit/delete actions (see [Expense Management](expense-management-implementation.md)) |
 | `src/types/expense.ts` | `ExpenseFilters`, `SortKey` |
@@ -66,7 +67,9 @@ describeRange(start: string, end: string): string;             // "Oct 1, 2026 â
 - Date sorts break ties by `createdAt`, so items entered on the same day keep a stable, intuitive order.
 - Amount sorts compare numerically; ties keep the existing order (`Array.prototype.sort` is stable in modern engines).
 
-### Date presets (`ExpenseFiltersBar`)
+### Date presets (`src/lib/date-ranges.ts`)
+
+Preset ranges are defined once in `src/lib/date-ranges.ts` and shared with the [export dialog](data-export-implementation.md). The filter bar shows four of them; it leaves out *Last 90 days*, which only the export dialog offers.
 
 | Chip | Range |
 |---|---|
@@ -120,5 +123,5 @@ There are no automated tests yet. Manual checklist:
 ## Related documentation
 
 - [Expense Management](expense-management-implementation.md): row actions
-- [CSV Export](csv-export-implementation.md): exports exactly the filtered, sorted results
+- [Data Export](data-export-implementation.md): the **Exportâ€¦** button opens the export dialog pre-filled with this page's date range, category, search and sort
 - [Dashboard Analytics](dashboard-analytics-implementation.md): uses the same aggregation helpers

@@ -43,7 +43,7 @@ Record every purchase or bill in a few seconds, fix mistakes, and remove anythin
 
    ![Delete confirmation dialog](../images/expense-management/delete-confirm.png)
 
-> ⚠️ Deleting can't be undone. If you might want your data back later, [export it to CSV](how-to-csv-export.md) first.
+> ⚠️ Deleting can't be undone. If you might want your data back later, [export it](how-to-data-export.md) first.
 
 ## Fixing form errors
 

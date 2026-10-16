@@ -63,7 +63,7 @@ Click **Clear filters** (next to the date chips) to reset search, category and d
 That's expected: filters reset each time you open the page.
 
 **Can I export just what I'm looking at?**
-Yes. Click **Export CSV** to download exactly the filtered list. See [How to export to CSV](how-to-csv-export.md).
+Yes. Click **Export…** at the top of the page. The export window opens with your current search, category, dates and sort already filled in. See [How to export your expenses](how-to-data-export.md).
 
 **Nothing shows up.**
 You'll see *"No matching expenses"*. Click **Clear filters** and try a broader search.
@@ -71,7 +71,7 @@ You'll see *"No matching expenses"*. Click **Clear filters** and try a broader s
 ## Related guides
 
 - [How to add, edit and delete expenses](how-to-expense-management.md)
-- [How to export to CSV](how-to-csv-export.md)
+- [How to export your expenses](how-to-data-export.md)
 
 ---
 

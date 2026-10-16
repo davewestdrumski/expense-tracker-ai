@@ -25,10 +25,11 @@ Spendwise saves your expenses automatically, but only in **this browser on this 
 
 Export your expenses regularly:
 
-1. Go to **Expenses**, clear any filters, and click **Export CSV**.
-2. Keep the downloaded file somewhere safe, such as your cloud drive.
+1. On the **Dashboard**, click **Export…**.
+2. Choose **JSON** (a complete copy) or **CSV** (for spreadsheets), leave **All time** and all categories selected, and click **Export**.
+3. Keep the downloaded file somewhere safe, such as your cloud drive.
 
-See [How to export to CSV](how-to-csv-export.md).
+See [How to export your expenses](how-to-data-export.md).
 
 ## Try Spendwise with sample data
 
@@ -49,11 +50,11 @@ About three months of realistic expenses appear, so you can try the charts, filt
 The saved data was damaged. Spendwise starts with an empty list. If you need to try recovering it, ask for help **before** adding anything new, because the next change replaces the damaged data.
 
 **"Couldn't save to local storage".**
-Your browser's storage is full or blocked, which is common in private windows. Your changes work for now but won't survive closing the tab. Export to CSV, then check your browser's privacy settings.
+Your browser's storage is full or blocked, which is common in private windows. Your changes work for now but won't survive closing the tab. Export your expenses, then check your browser's privacy settings.
 
 ## Related guides
 
-- [How to export to CSV](how-to-csv-export.md)
+- [How to export your expenses](how-to-data-export.md)
 - [How to add, edit and delete expenses](how-to-expense-management.md)
 
 ---
