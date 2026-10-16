@@ -23,12 +23,15 @@ Spendwise saves your expenses automatically, but only in **this browser on this 
 
 ## Keep a backup
 
-Export your expenses regularly:
+Make a **Full Backup** regularly. Unlike a CSV, it can be restored into Spendwise later:
 
-1. Go to **Expenses**, clear any filters, and click **Export CSV**.
-2. Keep the downloaded file somewhere safe, such as your cloud drive.
+1. Open **Export Hub** and click **Back up now**. With no cloud drive connected, the backup file downloads to your device.
+2. Keep the file somewhere safe, such as your own cloud drive.
+3. To get your data back, use **Restore from backup** on the same page.
 
-See [How to export to CSV](how-to-csv-export.md).
+See [How to export, share and back up your expenses](how-to-data-export.md). For a spreadsheet-friendly copy, see [How to export to CSV](how-to-csv-export.md).
+
+> The **Backed up** badge in the navigation also turns green after a backup to a *simulated* cloud service. Only a downloaded file is a real copy.
 
 ## Try Spendwise with sample data
 
@@ -46,13 +49,14 @@ About three months of realistic expenses appear, so you can try the charts, filt
 ## Troubleshooting
 
 **A red banner says "We couldn't read your saved expenses".**
-The saved data was damaged. Spendwise starts with an empty list. If you need to try recovering it, ask for help **before** adding anything new, because the next change replaces the damaged data.
+The saved data was damaged. Spendwise starts with an empty list. If you need to try recovering it, ask for help **before** adding anything new, because the next change replaces the damaged data. If you have a backup file, use **Export Hub → Restore from backup**.
 
 **"Couldn't save to local storage".**
 Your browser's storage is full or blocked, which is common in private windows. Your changes work for now but won't survive closing the tab. Export to CSV, then check your browser's privacy settings.
 
 ## Related guides
 
+- [How to export, share and back up your expenses](how-to-data-export.md)
 - [How to export to CSV](how-to-csv-export.md)
 - [How to add, edit and delete expenses](how-to-expense-management.md)
 

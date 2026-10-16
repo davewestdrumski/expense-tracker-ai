@@ -9,7 +9,7 @@ Record every purchase or bill in a few seconds, fix mistakes, and remove anythin
 ## Add an expense
 
 1. Click **Add expense** in the top-right corner.
-   On a phone, tap the round **+** button in the middle of the bottom bar.
+   On a phone, tap the round **+** button in the bottom bar (between **Expenses** and **Export Hub**).
 
    ![The Add expense button in the top navigation bar](../images/expense-management/add-button.png)
 

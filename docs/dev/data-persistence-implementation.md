@@ -25,7 +25,7 @@ other tab writes ──► window "storage" event ──► loadExpenses() ─�
 | File | Role |
 |---|---|
 | `src/context/ExpenseContext.tsx` | State, load/save effects, cross-tab sync, mutations, `useExpenses()` |
-| `src/lib/storage.ts` | `loadExpenses`, `saveExpenses`, `isExpense` (record guard), `createId` |
+| `src/lib/storage.ts` | `loadExpenses`, `saveExpenses`, `isExpense` (exported record guard, also used by restore), `createId` |
 | `src/components/Providers.tsx` | Wires `onPersistError` to the toast system |
 | `src/components/LoadError.tsx` | Banner shown when stored data couldn't be read |
 | `src/lib/sample-data.ts` | `generateSampleExpenses()` |
@@ -48,10 +48,13 @@ interface ExpenseContextValue {
   isLoading: boolean;          // true until the first localStorage read finishes
   loadError: string | null;
   addExpense, addMany, updateExpense, deleteExpense, clearAll;
+  importExpenses(incoming: Expense[], mode: "merge" | "replace"): { added: number; skipped: number };
 }
 ```
 
 `addMany(inputs)` builds IDs and timestamps for each input and prepends them in one state update (used by sample data). `clearAll()` exists but has no UI.
+
+`importExpenses` restores from a backup (Export Hub → **Restore from backup**): `"merge"` prepends records whose `id` isn't already present and reports how many were skipped; `"replace"` swaps the whole list. Callers must validate records with `isExpense` first.
 
 ## Implementation notes
 
@@ -96,7 +99,7 @@ There are no automated tests yet. Manual checklist:
 
 ## Known limitations
 
-- No sync between devices or browsers; no backup or import in this branch. Export to CSV is the only way out. See [CSV Export](csv-export-implementation.md).
+- No sync between devices or browsers. Backups are made and restored through the [Export Hub](data-export-implementation.md) (Full Backup JSON + `importExpenses`); cloud destinations there are simulated, so a real off-device copy means downloading the file.
 - No undo or history.
 - No schema migrations yet (the `v1` key suffix leaves room for them).
 
@@ -104,3 +107,4 @@ There are no automated tests yet. Manual checklist:
 
 - [Expense Management](expense-management-implementation.md)
 - [CSV Export](csv-export-implementation.md)
+- [Data Export (Export Hub)](data-export-implementation.md): backup and restore

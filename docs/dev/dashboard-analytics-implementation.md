@@ -11,7 +11,7 @@ The home route (`/`) summarizes spending with four stat cards, a 6-month bar cha
 ## Architecture
 
 ```
-/ (src/app/page.tsx)
+/ (src/app/(app)/page.tsx)
   stats = useMemo(() => { …all aggregates… }, [expenses])
   │
   ├─ <SummaryCards total thisMonth lastMonth thisMonthCount dailyAverage topCategory />
@@ -26,7 +26,7 @@ All aggregates are computed in **one `useMemo`** keyed on `expenses`, so they re
 
 | File | Role |
 |---|---|
-| `src/app/page.tsx` | Aggregation, loading and empty states, layout, Month/All-time toggle |
+| `src/app/(app)/page.tsx` | Aggregation, loading and empty states, layout, Month/All-time toggle |
 | `src/components/SummaryCards.tsx` | Four stat cards, including the month-over-month change badge |
 | `src/components/MonthlyChart.tsx` | Accessible HTML/CSS bar chart with "nice" axis ticks and tooltips |
 | `src/components/CategoryBreakdown.tsx` | Part-to-whole strip plus a ranked bar list |

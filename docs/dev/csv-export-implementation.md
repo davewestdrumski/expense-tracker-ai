@@ -26,7 +26,7 @@ toast: "Exported N expenses to CSV"  |  error toast
 
 | File | Role |
 |---|---|
-| `src/app/expenses/page.tsx` | `handleExport()`: guards, try/catch, toasts; renders the button |
+| `src/app/(app)/expenses/page.tsx` | `handleExport()`: guards, try/catch, toasts; renders the button |
 | `src/lib/expenses.ts` | `csvEscape`, `expensesToCSV`, `downloadCSV` |
 
 ## API
@@ -84,9 +84,10 @@ There are no automated tests yet. Manual checklist:
 - CSV only; columns are fixed.
 - The filename can't be customized.
 
-> **Branch note:** the three `feature-data-export-*` branches change or replace this feature. See each branch's `docs/dev/data-export-implementation.md`.
+> **On this branch** this export is unchanged. The [Export Hub](data-export-implementation.md) adds templates, share links, scheduled exports and backup/restore alongside it.
 
 ## Related documentation
 
 - [Expense Search & Filtering](expense-search-filtering-implementation.md): defines what gets exported
-- [Data Persistence](data-persistence-implementation.md): CSV is the only way to get a copy of your data out
+- [Data Export (Export Hub)](data-export-implementation.md): templates, destinations, share links, backups
+- [Data Persistence](data-persistence-implementation.md): storage format and restore

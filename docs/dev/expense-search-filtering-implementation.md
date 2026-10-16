@@ -11,7 +11,7 @@ The Expenses page (`/expenses`) lists every expense with keyword search, a categ
 ## Architecture
 
 ```
-/expenses (src/app/expenses/page.tsx)
+/expenses (src/app/(app)/expenses/page.tsx)
   state: filters: ExpenseFilters, sort: SortKey, visible: number
   │
   ├─ <ExpenseFiltersBar filters sort onChange onSortChange>   (controlled)
@@ -28,7 +28,7 @@ Filtering and sorting are **pure functions** in `src/lib/expenses.ts`, so they'r
 
 | File | Role |
 |---|---|
-| `src/app/expenses/page.tsx` | Page state, derived results, results header, list, paging, empty states |
+| `src/app/(app)/expenses/page.tsx` | Page state, derived results, results header, list, paging, empty states |
 | `src/components/ExpenseFiltersBar.tsx` | Search, category select, sort select, start/end dates, preset chips, Clear filters |
 | `src/lib/expenses.ts` | `filterExpenses`, `sortExpenses`, `sumAmounts`, `describeRange`, `DEFAULT_FILTERS` |
 | `src/components/ExpenseRow.tsx` | Row rendering with edit/delete actions (see [Expense Management](expense-management-implementation.md)) |

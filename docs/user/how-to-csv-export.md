@@ -53,6 +53,7 @@ That's intentional. Descriptions beginning with `=`, `+`, `-` or `@` get an apos
 
 ## Related guides
 
+- [How to export, share and back up your expenses](how-to-data-export.md): templates, share links, backups
 - [How to search and filter expenses](how-to-expense-search-filtering.md)
 - [How to keep your data safe](how-to-data-persistence.md)
 

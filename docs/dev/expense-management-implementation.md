@@ -40,6 +40,7 @@ The modal and dialog are rendered **once**, so pages never manage their own copi
 
 | File | Role |
 |---|---|
+| `src/app/(app)/layout.tsx` | Mounts `Providers` (and `CloudProvider`, `Navbar`) for all app pages |
 | `src/components/Providers.tsx` | Provider stack (`ToastProvider` → `ExpenseProvider` → `ExpenseActionsHost`); owns modal and confirmation state; exports `useExpenseActions()` |
 | `src/components/ExpenseForm.tsx` | Controlled form: description, amount, date, category; validation display; submit/cancel |
 | `src/lib/validation.ts` | `validateExpense()`, `toExpenseInput()`, limits (`MAX_AMOUNT`, `MAX_DESCRIPTION`) |

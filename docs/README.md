@@ -13,16 +13,18 @@ Generate docs for a new feature with the Claude Code command `/document-feature 
 | Dashboard Analytics | [Implementation](dev/dashboard-analytics-implementation.md) | [How to read your dashboard](user/how-to-dashboard-analytics.md) |
 | CSV Export | [Implementation](dev/csv-export-implementation.md) | [How to export to CSV](user/how-to-csv-export.md) |
 | Data Persistence & Sample Data | [Implementation](dev/data-persistence-implementation.md) | [How to keep your data safe](user/how-to-data-persistence.md) |
+| Data Export (Export Hub) | [Implementation](dev/data-export-implementation.md) | [How to export, share and back up your expenses](user/how-to-data-export.md) |
 
 ## Conventions
 
 - **Developer docs:** `docs/dev/<feature-slug>-implementation.md`
 - **User guides:** `docs/user/how-to-<feature-slug>.md`
 - **Screenshots:** `docs/images/<feature-slug>/<name>.png`. Each user guide ends with a *Screenshots needed* table listing the images it expects. Images not captured yet appear as broken image links until added.
-- **Feature type:** every feature in this app is **frontend-only**. Data lives in the browser's `localStorage`, and there is no backend.
+- **Feature type:** every feature in this app is **frontend-only**. Data lives in the browser's `localStorage`, and there is no backend. The Export Hub's cloud services are simulated.
+- **Routes:** app pages live in the `src/app/(app)` route group; the public share viewer is `src/app/(public)/shared`.
 
 ## Project overview
 
 - Stack: Next.js 14 (App Router), TypeScript, Tailwind CSS
 - Setup and scripts: see the [root README](../README.md)
-- Source layout: `src/app` (routes), `src/components` (UI), `src/context` (state), `src/lib` (pure logic), `src/types`
+- Source layout: `src/app` (routes, in `(app)` and `(public)` groups), `src/components` (UI), `src/context` (state), `src/lib` (pure logic), `src/types`
