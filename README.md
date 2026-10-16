@@ -37,3 +37,7 @@ src/
   lib/            formatting, validation, filtering/aggregation, CSV, storage, sample data
   types/          shared types and the category list
 ```
+
+## Documentation
+
+Feature documentation for developers and end users lives in [`docs/`](docs/README.md).
